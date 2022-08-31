@@ -102,6 +102,7 @@ int do_op(int ID, HWND hWnd)
     addNum += (floatNum) ? "" : ".00";
 
     // Imprimir todos os números.
+    DestroyWindow(*showNumPtr); // Destruir a janela antes de imprimir: melhora a performance.
     *showNumPtr = CreateWindow("STATIC", addNum.c_str(), WS_VISIBLE | WS_CHILD | SS_RIGHT, 5, 22,
                                270, 15, hWnd, (HMENU)20, (HINSTANCE)GetWindowLongPtr(hWnd, GWLP_HINSTANCE), NULL);
 
@@ -161,9 +162,11 @@ int do_op(int ID, HWND hWnd)
     }
     std::string showNum = std::to_string(num3);
     showNum.resize(showNum.length() - 4); // fazendo o float ter apenas duas casas decimais por mudar o tamanho da string - método perigoso.
-    if (lastOp)
+    if (lastOp){
+        DestroyWindow(*showNumPtr);
         *showNumPtr = CreateWindow("STATIC", showNum.c_str(), WS_VISIBLE | WS_CHILD | SS_RIGHT, 5, 22,
                                    270, 15, hWnd, (HMENU)20, (HINSTANCE)GetWindowLongPtr(hWnd, GWLP_HINSTANCE), NULL);
+    }
 }
 
 // Função que interpreta mensagens do tecladdo e passam para a função de operação com os ID's de acordo.

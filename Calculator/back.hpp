@@ -4,6 +4,8 @@
 #include <utility>
 #include <windowsx.h>
 
+//test for git commit
+
 // Convert a entire string to a number MACRO.
 #define STRING_TO_INT(x, y) \
     ss << x;                \
